@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: job-dashboard-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - BASEROW_URL=https://n8n-baserow.v6s8rs.easypanel.host/api/database/rows/table
+      - BASEROW_TOKEN=xUhLDnUtV09UKOSDDd5kgW9E1GBzPA0x
+      - TABLE_ID=699
+    restart: unless-stopped
+    networks:
+      - job-dashboard-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: job-dashboard-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:8000/api
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - job-dashboard-network
+
+networks:
+  job-dashboard-network:
+    driver: bridge
