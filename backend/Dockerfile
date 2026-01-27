@@ -2,8 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files with wildcard to handle both package.json and package-lock.json
-COPY package*.json ./
+# Copy package.json first
+COPY package.json ./
+
+# Copy package-lock.json if it exists
+COPY package-lock.json* ./
 
 # Install production dependencies
 RUN npm install --omit=dev
