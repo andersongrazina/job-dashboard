@@ -2,14 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files - tenta copiar de diferentes locais
-COPY package*.json ./
+# Copy everything first
+COPY . .
 
 # Install production dependencies
 RUN npm install --omit=dev
-
-# Copy application code
-COPY . .
 
 # Expose port
 EXPOSE 8000
