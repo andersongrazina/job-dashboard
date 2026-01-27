@@ -80,7 +80,8 @@ app.get('/api/jobs', async (req, res) => {
 
     const response = await axios.get(url, {
       headers: {
-        'Authorization': `Token ${config.baserowToken}`
+        'Authorization': `Token ${config.baserowToken}`,
+        'Content-Type': 'application/json'
       }
     });
 
@@ -122,7 +123,8 @@ app.get('/api/jobs/search', async (req, res) => {
     const url = `${config.baserowUrl}/${config.tableId}/?user_field_names=true`;
     const response = await axios.get(url, {
       headers: {
-        'Authorization': `Token ${config.baserowToken}`
+        'Authorization': `Token ${config.baserowToken}`,
+        'Content-Type': 'application/json'
       }
     });
 
