@@ -11,8 +11,8 @@
    - Branch: `main`
 
 2. **Dockerfile**
-   - Caminho: `backend/Dockerfile`
-   - Contexto: `backend/` (ou deixar automático)
+   - Caminho: `Dockerfile` (na raiz)
+   - Contexto: Raiz do repositório (automático)
 
 3. **Variáveis de Ambiente**
    ```
@@ -106,8 +106,8 @@ docker logs -f <container-id>
    - Branch: `main`
 
 2. **Dockerfile**
-   - Caminho: `frontend/Dockerfile`
-   - Contexto: `frontend/` (ou deixar automático)
+   - Caminho: `Dockerfile.frontend` (na raiz)
+   - Contexto: Raiz do repositório (automático)
 
 3. **Variáveis de Ambiente**
    ```
