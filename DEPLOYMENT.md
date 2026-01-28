@@ -11,8 +11,8 @@
    - Branch: `main`
 
 2. **Dockerfile**
-   - Caminho: `Dockerfile.backend`
-   - Contexto: Raiz do repositório
+   - Caminho: `backend/Dockerfile`
+   - Contexto: `backend/` (ou deixar automático)
 
 3. **Variáveis de Ambiente**
    ```
@@ -40,13 +40,16 @@ job-dashboard/
 │   ├── package-lock.json
 │   ├── server.js
 │   ├── .env
-│   ├── Dockerfile (local)
-│   └── .dockerignore
+│   ├── Dockerfile ✅
+│   └── .dockerignore ✅
 ├── frontend/
-│   ├── ...
-│   └── Dockerfile
-├── Dockerfile.backend (para EasyPanel)
-├── .dockerignore (raiz)
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── src/
+│   ├── public/
+│   ├── nginx.conf
+│   ├── Dockerfile ✅
+│   └── .dockerignore ✅
 └── README.md
 ```
 
@@ -104,7 +107,7 @@ docker logs -f <container-id>
 
 2. **Dockerfile**
    - Caminho: `frontend/Dockerfile`
-   - Contexto: Raiz do repositório
+   - Contexto: `frontend/` (ou deixar automático)
 
 3. **Variáveis de Ambiente**
    ```
@@ -112,16 +115,40 @@ docker logs -f <container-id>
    ```
 
 4. **Porta**
-   - Expor: `5173` (ou a porta configurada no Vite)
+   - Expor: `3000`
+   - Protocolo: HTTP
+
+---
+
+## Troubleshooting Geral
+
+### Backend não conecta ao Baserow
+1. Verificar se `BASEROW_URL` está correto
+2. Verificar se `BASEROW_TOKEN` é válido
+3. Verificar se `TABLE_ID` existe no Baserow
+4. Testar a URL manualmente no navegador
+
+### Frontend não conecta ao Backend
+1. Verificar se `VITE_API_URL` está correto
+2. Verificar se o backend está rodando
+3. Verificar CORS no backend
+4. Abrir DevTools (F12) e verificar erros de rede
+
+### Rebuild necessário
+Se fizer mudanças no código:
+1. Fazer commit e push
+2. No EasyPanel, clicar em "Redeploy" ou "Rebuild"
+3. Aguardar o build completar
 
 ---
 
 ## Notas Importantes
 
-- ✅ O `Dockerfile.backend` está na raiz para compatibilidade com EasyPanel
-- ✅ O `backend/Dockerfile` é para desenvolvimento local
+- ✅ Cada aplicação (backend e frontend) tem seu próprio Dockerfile
+- ✅ Cada pasta tem seu próprio `.dockerignore`
 - ✅ Sempre fazer commit antes de fazer deploy
 - ✅ Verificar logs após deploy para erros
+- ✅ O contexto de build deve ser a pasta da aplicação (backend/ ou frontend/)
 
 ---
 
