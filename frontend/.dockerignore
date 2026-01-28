@@ -5,8 +5,6 @@ npm-debug.log
 README.md
 .env.example
 .DS_Store
-frontend
-.github
-.vscode
 dist
 build
+.vscode
